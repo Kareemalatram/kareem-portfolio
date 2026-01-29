@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kareem Alatram | System Integrity Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap");
+
+      :root {
+        --primary: #3b82f6;
+        --accent: #10b981;
+        --bg: #020617;
+      }
+
+      body {
+        font-family: "Space Grotesk", sans-serif;
+        background-color: var(--bg);
+        color: #e2e8f0;
+        overflow-x: hidden;
+      }
+
+      .mono {
+        font-family: "Fira Code", monospace;
+      }
+
+      .grid-bg {
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(59, 130, 246, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(59, 130, 246, 0.05) 1px,
+            transparent 1px
+          );
+        background-size: 40px 40px;
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+      }
+
+      .glitch {
+        position: relative;
+        display: inline-block;
+      }
+      .glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 2px;
+        text-shadow: -1px 0 #ff00c1;
+        top: 0;
+        overflow: hidden;
+        clip: rect(0, 900px, 0, 0);
+        animation: noise-anim 2s infinite linear alternate-reverse;
+      }
+
+      @keyframes noise-anim {
+        0% {
+          clip: rect(10px, 9999px, 50px, 0);
+        }
+        20% {
+          clip: rect(30px, 9999px, 20px, 0);
+        }
+        40% {
+          clip: rect(60px, 9999px, 80px, 0);
+        }
+        100% {
+          clip: rect(10px, 9999px, 30px, 0);
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .qa-border {
+        border: 1px solid rgba(59, 130, 246, 0.15);
+        transition: all 0.3s ease;
+      }
+      .qa-border:hover {
+        border-color: var(--primary);
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+        background: rgba(15, 23, 42, 0.6);
+      }
+
+      .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* Scanning Bar */
+      .scan-line {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: scan 3s linear infinite;
+        opacity: 0.5;
+      }
+      @keyframes scan {
+        0% {
+          top: 0%;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body class="selection:bg-blue-500/30">
+    <div class="grid-bg"></div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 w-full z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-md"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-2">
+          <div
+            class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center font-bold text-white italic"
+          >
+            K
+          </div>
+          <span
+            class="font-bold tracking-tighter text-lg uppercase hidden sm:block"
+            >Alatram</span
+          >
+        </div>
+
+        <div
+          class="flex items-center gap-4 sm:gap-8 text-[10px] sm:text-xs font-bold uppercase tracking-widest"
+        >
+          <a href="#about" class="nav-link hover:text-blue-400">Info</a>
+          <a href="#skills" class="nav-link hover:text-blue-400">Specs</a>
+          <a href="#experience" class="nav-link hover:text-blue-400">Log</a>
+          <a
+            href="#contact"
+            class="text-blue-400 border border-blue-400/30 px-3 py-1 rounded hover:bg-blue-400/10 transition whitespace-nowrap"
+            >Connect</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="about"
+      class="min-h-screen flex flex-col justify-center px-6 pt-20"
+    >
+      <div
+        class="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center"
+      >
+        <div class="space-y-6">
+          <div class="mono text-blue-500 text-sm mb-2 flex items-center gap-2">
+            <span
+              class="inline-block w-2 h-2 bg-blue-500 rounded-full animate-pulse"
+            ></span>
+            System Status: Verified Integrity
+          </div>
+          <h1
+            class="text-5xl md:text-8xl font-bold leading-none tracking-tighter"
+          >
+            Architect of <br />
+            <span class="glitch text-blue-500" data-text="Reliability."
+              >Reliability.</span
+            >
+          </h1>
+          <p class="text-slate-400 text-lg md:text-xl max-w-lg leading-relaxed">
+            I am <span class="text-white">Kareem Alatram</span>. I specialize in
+            the intersection of AI-driven QA and Cloud Infrastructure, ensuring
+            zero-defect deployments for complex systems.
+          </p>
+          <div class="flex gap-4 pt-4">
+            <a
+              href="#skills"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg shadow-blue-500/20"
+            >
+              View Specifications
+            </a>
+          </div>
+        </div>
+
+        <div class="relative lg:block hidden reveal">
+          <div
+            class="absolute -inset-10 bg-blue-500/5 blur-[120px] rounded-full"
+          ></div>
+          <div
+            class="relative bg-slate-900/90 border border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-2xl overflow-hidden"
+          >
+            <div class="scan-line"></div>
+            <div class="flex items-center justify-between mb-8">
+              <div class="flex gap-1.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+              </div>
+              <div
+                class="mono text-[10px] text-blue-400 px-2 py-1 bg-blue-400/10 rounded"
+              >
+                SYSTEM_SCAN_ACTIVE
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between text-[10px] mono mb-2">
+                  <span class="text-slate-500">INFRASTRUCTURE_VALIDATION</span>
+                  <span class="text-blue-400">98.2%</span>
+                </div>
+                <div
+                  class="w-full bg-slate-800 h-1 rounded-full overflow-hidden"
+                >
+                  <div
+                    class="bg-blue-500 h-full w-[98%] shadow-[0_0_10px_#3b82f6]"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4 mono text-[11px]">
+                <div class="p-3 bg-white/5 rounded border border-white/5">
+                  <div class="text-slate-500 mb-1">QA_AUTOMATION</div>
+                  <div class="text-green-400 font-bold">OPTIMIZED</div>
+                </div>
+                <div class="p-3 bg-white/5 rounded border border-white/5">
+                  <div class="text-slate-500 mb-1">CLOUD_LATENCY</div>
+                  <div class="text-blue-400 font-bold">MINIMAL</div>
+                </div>
+              </div>
+
+              <div class="p-4 bg-slate-950 rounded border border-blue-500/20">
+                <div class="text-[10px] text-slate-500 mb-2 mono">
+                  INTEGRITY_LOG:
+                </div>
+                <div class="text-[10px] mono space-y-1">
+                  <div class="text-green-400/80">
+                    > Initializing AI-Test Suite...
+                  </div>
+                  <div class="text-slate-400">
+                    > Mapping Alibaba VPC topology...
+                  </div>
+                  <div class="text-blue-400/80">
+                    > Stability check: 0 vulnerabilities found.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Specs Section -->
+    <section id="skills" class="py-24 px-6 relative">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-16 reveal">
+          <h2
+            class="text-xs font-bold text-blue-500 uppercase tracking-[0.4em] mb-4"
+          >
+            Core Specifications
+          </h2>
+          <h3 class="text-4xl md:text-5xl font-bold tracking-tight">
+            Technical Arsenal
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="reveal qa-border p-8 rounded-2xl bg-slate-900/30">
+            <i class="fas fa-microscope text-blue-500 text-2xl mb-6"></i>
+            <h4 class="text-lg font-bold mb-3">Manual Integrity</h4>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+              Precision testing across SDLC/STLC, specializing in UAT,
+              Regression, and Defect Life Cycle management in Agile/Scrum
+              environments.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >JIRA</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >SDLC</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >AGILE</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >STLC</span
+              >
+            </div>
+          </div>
+
+          <div class="reveal qa-border p-8 rounded-2xl bg-slate-900/30">
+            <i class="fas fa-bolt text-purple-500 text-2xl mb-6"></i>
+            <h4 class="text-lg font-bold mb-3">Automation Engine</h4>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+              Selenium WebDriver & Java frameworks built with Page Object Model
+              (POM), Maven, and TestNG for reusable testing architectures.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >SELENIUM</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >JAVA</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >TESTNG</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >MAVEN</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >GIT</span
+              >
+            </div>
+          </div>
+
+          <div class="reveal qa-border p-8 rounded-2xl bg-slate-900/30">
+            <i class="fas fa-server text-orange-500 text-2xl mb-6"></i>
+            <h4 class="text-lg font-bold mb-3">Cloud Infrastructure</h4>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+              Certified expertise in Alibaba Cloud: ECS, VPC, RDS, OSS, and SLB
+              for secure, scalable hosting.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >VPC</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >OSS</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >RDS</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >SLB</span
+              >
+            </div>
+          </div>
+
+          <div class="reveal qa-border p-8 rounded-2xl bg-slate-900/30">
+            <i class="fas fa-code text-emerald-500 text-2xl mb-6"></i>
+            <h4 class="text-lg font-bold mb-3">Web Systems</h4>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+              Designing high-performance interfaces using modern HTML5, CSS3,
+              JavaScript (ES6+), and PHP for server-side logic.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >HTML5/CSS3</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >JAVASCRIPT</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >PHP</span
+              >
+            </div>
+          </div>
+
+          <div class="reveal qa-border p-8 rounded-2xl bg-slate-900/30">
+            <i class="fas fa-brain text-cyan-500 text-2xl mb-6"></i>
+            <h4 class="text-lg font-bold mb-3">Next-Gen QA</h4>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+              Leveraging Generative AI for test case optimization, edge case
+              identification, and automated defect analysis.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >GENAI</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >AI-TESTING</span
+              >
+              <span
+                class="text-[9px] mono border border-white/10 px-2 py-0.5 rounded"
+                >PROMPT-ENG</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Log Section (Reordered: QA -> Cloud -> Web) -->
+    <section id="experience" class="py-24 px-6 bg-slate-950/40">
+      <div class="max-w-4xl mx-auto">
+        <h2
+          class="text-center text-xs font-bold text-blue-500 uppercase tracking-[0.4em] mb-12"
+        >
+          Service Logs
+        </h2>
+
+        <div class="relative">
+          <div class="absolute left-4 top-0 bottom-0 w-px bg-blue-500/20"></div>
+
+          <!-- Entry 1: QA -->
+          <div class="reveal relative pl-12 pb-16">
+            <div
+              class="absolute left-0 top-1 w-8 h-8 rounded-full border border-blue-500 bg-slate-950 z-10 flex items-center justify-center"
+            >
+              <div
+                class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"
+              ></div>
+            </div>
+            <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+              <h4 class="text-xl font-bold">Enterprise QA Specialist</h4>
+              <span
+                class="text-[10px] mono text-blue-400 bg-blue-400/5 border border-blue-400/20 px-2 py-1 rounded"
+              >
+                2025 - PRESENT</span
+              >
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+              Driving system stability through automated Selenium-Java
+              frameworks and AI-enhanced bug identification. Managing full test
+              documentation in JIRA and executing Agile regression suites.
+            </p>
+          </div>
+
+          <!-- Entry 2: Cloud -->
+          <div class="reveal relative pl-12 pb-16">
+            <div
+              class="absolute left-0 top-1 w-8 h-8 rounded-full border border-orange-500/50 bg-slate-950 z-10 flex items-center justify-center"
+            >
+              <div class="w-2 h-2 rounded-full bg-orange-500"></div>
+            </div>
+            <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+              <h4 class="text-xl font-bold">
+                Alibaba Cloud Computing & AI Internship
+              </h4>
+              <span
+                class="text-[10px] mono text-orange-400 bg-orange-400/5 border border-orange-400/20 px-2 py-1 rounded"
+              >
+                2024 - 2025</span
+              >
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Configured VPCs, RDS clusters, and ECS instances. Implemented SLB
+              for traffic management and OSS for secure data storage solutions
+              on Alibaba Cloud.
+            </p>
+          </div>
+
+          <!-- Entry 3: Web Systems -->
+          <div class="reveal relative pl-12 pb-16">
+            <div
+              class="absolute left-0 top-1 w-8 h-8 rounded-full border border-emerald-500/50 bg-slate-950 z-10 flex items-center justify-center"
+            >
+              <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+            </div>
+            <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+              <h4 class="text-xl font-bold">
+                Web Development | Clever Mind POB
+              </h4>
+              <span
+                class="text-[10px] mono text-emerald-400 bg-emerald-400/5 border border-emerald-400/20 px-2 py-1 rounded"
+                >2023 - 2024</span
+              >
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+              Developed responsive web applications using PHP, JavaScript, and
+              modern CSS frameworks. Focused on creating user-centric interfaces
+              with verified cross-browser compatibility.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connection Section -->
+    <section id="contact" class="py-32 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-5xl md:text-7xl font-bold tracking-tighter mb-8 italic">
+          Ready to <span class="text-blue-500">Integrate?</span>
+        </h2>
+        <p class="text-slate-400 mb-12 max-w-xl mx-auto">
+          Currently accepting new audits and system architectural challenges.
+          Reach out via encrypted link.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <a
+            href="mailto:kareem.alatram@gmail.com"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-full font-bold transition flex items-center justify-center gap-2"
+          >
+            <i class="fas fa-envelope"></i> Email
+          </a>
+          <a
+            href="https://api.whatsapp.com/send/?phone=0798348684&text&type=phone_number&app_absent=0"
+            target="_blank"
+            class="bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-full font-bold transition flex items-center justify-center gap-2"
+          >
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+          <a
+            href="https://www.linkedin.com/in/kareem-alatram-998882277/"
+            target="_blank"
+            class="border border-white/10 hover:bg-white/5 px-6 py-4 rounded-full font-bold transition flex items-center justify-center gap-2"
+          >
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+          <a
+            href="https://github.com/Kareemalatram"
+            target="_blank"
+            class="border border-white/10 hover:bg-white/5 px-6 py-4 rounded-full font-bold transition flex items-center justify-center gap-2"
+          >
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+
+        <!-- Updated Footer Section -->
+        <div
+          class="mt-24 pt-12 border-t border-white/5 flex justify-center items-center"
+        >
+          <div
+            class="text-slate-200 text-xl font-bold tracking-widest uppercase"
+          >
+            © 2026 Kareem Alatram
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("active");
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) target.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    </script>
+  </body>
+</html>
